@@ -1,4 +1,5 @@
 import subprocess
+import sys
 from pathlib import Path
 
 PROJECT_DIR = Path(__file__).resolve().parent
@@ -36,7 +37,7 @@ def run_ipsae(extracted_by_job, pae_cutoff=10, dist_cutoff=10):
             try:
 
                 # Command to run ipsae.py, will stop if errors
-                running = subprocess.run(["python", str(IPSAE_SCRIPT), str(json_path), str(matching_cif), str(pae_cutoff), str(dist_cutoff)],
+                running = subprocess.run([sys.executable, str(IPSAE_SCRIPT), str(json_path), str(matching_cif), str(pae_cutoff), str(dist_cutoff)],
                                          check=True, capture_output=True, text=True)
                 print(f"Successfully ran IPSAE on " f"{json_path.name} + {matching_cif.name}")
 
