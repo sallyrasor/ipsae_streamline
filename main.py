@@ -3,32 +3,33 @@ from file_finder import extract_files
 from ipsae_run import run_ipsae
 from results import write_results
 
-def get_source_dir():
-# Prompt user for folder that holds AlphaFold Zip and validate
+def get_zip_path():
+
+    # Prompt user for AlphaFold Zip and validate
      while True:
-        source_dir = Path(input("Enter the path to the folder that contains your AlphaFold zip files: ").strip().strip('"'))
+        zip_path = Path(input("Enter the path to the AlphaFold ZIP file: ").strip().strip('"'))
 
-        if source_dir.exists():
-            return source_dir
+        if zip_path.exists():
+            return zip_path
 
-        print(f"{source_dir} folder doesn't exist")
-        retry = input("To choose a new folder type y = retry or type q = quit): ").strip().lower()
+        print(f"{zip_path} doesn't exist")
+        retry = input("Try another path? [y/n]: ").strip().lower()
 
-        if retry == "q":
+        if retry == "n":
             return None
 
 def main():
 
-    source_dir = get_source_dir()
-    if source_dir is None:
+    zip_path = get_zip_path()
+    if zip_path is None:
         return
 
     # Did not validate output locations since they can be easily created
-    target_dir = Path(input("Enter the path to the folder to extract files into: ").strip().strip('"'))
-    workbook_path = Path(input("Enter the path for the output Excel file: ").strip().strip('"'))
+    target_dir = Path(input("Enter the folder where the extracted files should be saved: ").strip().strip('"'))
+    workbook_path = Path(input("Enter the path for the output Excel file (.xlsx): ").strip().strip('"'))
 
-    # Unzip AlphaFold files, score then with Dunbrack ipsae.py, write the scores to an excel
-    extracted_by_job = extract_files(source_dir, target_dir)
+    # Unzip AlphaFold files, score then with Dunbrack ipsae.py, write the scores to an Excel
+    extracted_by_job = extract_files(zip_path, target_dir)
     results_by_job = run_ipsae(extracted_by_job)
     write_results(results_by_job, workbook_path)
 
