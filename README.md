@@ -13,13 +13,13 @@ Given an AlphaFold3 result .zip file, this tool:
 - Compiles every job's chain-pair and residue-level scores into one .xlsx workbook, tagged with the job name they came from
 
 ## **Installation**
+*Run one line at a time*
 
 **1. Clone the repo:**
 
 git clone https://github.com/sallyrasor/ipsae_streamline.git
 
 cd ipsae_streamline
-
 
 **2. Create and activate a virtual environment:**
 
@@ -29,12 +29,9 @@ python -m venv .venv
 
 source .venv/bin/activate   # Mac/Linux
 
-
 **3. Install dependencies:**
 
 pip install -r requirements.txt
-
-
 
 **4. Run it:**
 
@@ -66,7 +63,7 @@ AlphaFold prediction zip files and extracted results are not included in this re
 
 ### **Future improvements**
 
-Handle duplicate filename collisions and support configurable PAE/distance cutoffs via a prompt. They are currently both defaulted to 10.
+Handle duplicate filename collisions. Streamline opening excel workbook, you currently need to open through path each time for it to properly update. Support configurable PAE/distance cutoffs via a prompt, they are currently both defaulted to 10.
 
 ## **License**
 
